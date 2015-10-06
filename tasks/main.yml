@@ -1,19 +1,10 @@
 ---
-- name: Create service account for Spark
-  user: name=spark
-        system=yes
-        home={{ spark_lib_dir }}
-        shell=/bin/false
-        state=present
-
 - name: Ensure Spark configuration directory exists
   file: path="{{ spark_conf_dir }}"
         state=directory
 
 - name: Ensure Spark log and run directories exist
   file: path="{{ item }}"
-        owner=spark
-        group=spark
         mode=0755
         state=directory
   with_items:
